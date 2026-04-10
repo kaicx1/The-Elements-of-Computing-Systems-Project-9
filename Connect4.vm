@@ -1,0 +1,694 @@
+// Compiled Connect4.jack:
+function Connect4.new 1
+    push constant 4
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 42
+    call Array.new 1
+    pop this 0
+    push constant 0
+    pop local 0
+    push constant 3
+    pop this 1
+    push constant 1
+    pop this 2
+    push constant 0
+    pop this 3
+    call Screen.clearScreen 0
+    pop temp 0
+    push pointer 0
+    call Connect4.drawGrid 1
+    pop temp 0
+    push pointer 0
+    call Connect4.drawCursor 1
+    pop temp 0
+    push pointer 0
+    return
+function Connect4.run 1
+    push argument 0
+    pop pointer 0
+label Connect4_0
+    push this 3
+    not
+    not
+    if-goto Connect4_1
+    call Keyboard.keyPressed 0
+    pop local 0
+    push local 0
+    push constant 130
+    eq
+    not
+    if-goto Connect4_3
+    push pointer 0
+    push constant 1
+    neg
+    call Connect4.moveCursor 2
+    pop temp 0
+    push constant 150
+    call Sys.wait 1
+    pop temp 0
+    goto Connect4_2
+label Connect4_3
+label Connect4_2
+    push local 0
+    push constant 132
+    eq
+    not
+    if-goto Connect4_5
+    push pointer 0
+    push constant 1
+    call Connect4.moveCursor 2
+    pop temp 0
+    push constant 150
+    call Sys.wait 1
+    pop temp 0
+    goto Connect4_4
+label Connect4_5
+label Connect4_4
+    push local 0
+    push constant 32
+    eq
+    not
+    if-goto Connect4_7
+    push pointer 0
+    call Connect4.drop 1
+    pop temp 0
+    push constant 200
+    call Sys.wait 1
+    pop temp 0
+    goto Connect4_6
+label Connect4_7
+label Connect4_6
+    goto Connect4_0
+label Connect4_1
+    push constant 0
+    return
+function Connect4.moveCursor 1
+    push argument 0
+    pop pointer 0
+    push this 1
+    push argument 1
+    add
+    pop local 0
+    push local 0
+    push constant 1
+    neg
+    gt
+    push local 0
+    push constant 7
+    lt
+    and
+    not
+    if-goto Connect4_9
+    push pointer 0
+    call Connect4.eraseCursor 1
+    pop temp 0
+    push local 0
+    pop this 1
+    push pointer 0
+    call Connect4.drawCursor 1
+    pop temp 0
+    goto Connect4_8
+label Connect4_9
+label Connect4_8
+    push constant 0
+    return
+function Connect4.drop 2
+    push argument 0
+    pop pointer 0
+    push constant 5
+    pop local 0
+label Connect4_10
+    push local 0
+    push constant 1
+    neg
+    gt
+    not
+    if-goto Connect4_11
+    push local 0
+    push constant 7
+    call Math.multiply 2
+    push this 1
+    add
+    pop local 1
+    push local 1
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    push constant 0
+    eq
+    not
+    if-goto Connect4_13
+    push local 1
+    push this 0
+    add
+    push this 2
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push this 2
+    push constant 1
+    eq
+    not
+    if-goto Connect4_15
+    push pointer 0
+    push local 0
+    push this 1
+    call Connect4.drawX 3
+    pop temp 0
+    goto Connect4_14
+label Connect4_15
+    push pointer 0
+    push local 0
+    push this 1
+    call Connect4.drawO 3
+    pop temp 0
+label Connect4_14
+    push pointer 0
+    push local 0
+    push this 1
+    call Connect4.hasWon 3
+    not
+    if-goto Connect4_17
+    push this 2
+    push constant 1
+    eq
+    not
+    if-goto Connect4_19
+    push constant 9
+    call String.new 1
+    push constant 88
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    push constant 119
+    call String.appendChar 2
+    push constant 105
+    call String.appendChar 2
+    push constant 110
+    call String.appendChar 2
+    push constant 115
+    call String.appendChar 2
+    push constant 33
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    call Output.printString 1
+    pop temp 0
+    goto Connect4_18
+label Connect4_19
+    push constant 9
+    call String.new 1
+    push constant 79
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    push constant 119
+    call String.appendChar 2
+    push constant 105
+    call String.appendChar 2
+    push constant 110
+    call String.appendChar 2
+    push constant 115
+    call String.appendChar 2
+    push constant 33
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    call Output.printString 1
+    pop temp 0
+label Connect4_18
+    push constant 1
+    neg
+    pop this 3
+    push constant 0
+    return
+    goto Connect4_16
+label Connect4_17
+label Connect4_16
+    push this 2
+    push constant 1
+    eq
+    not
+    if-goto Connect4_21
+    push constant 2
+    pop this 2
+    goto Connect4_20
+label Connect4_21
+    push constant 1
+    pop this 2
+label Connect4_20
+    push constant 0
+    return
+    goto Connect4_12
+label Connect4_13
+label Connect4_12
+    push local 0
+    push constant 1
+    sub
+    pop local 0
+    goto Connect4_10
+label Connect4_11
+    push constant 0
+    return
+function Connect4.hasWon 1
+    push argument 0
+    pop pointer 0
+    push argument 1
+    push constant 7
+    call Math.multiply 2
+    push argument 2
+    add
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    pop local 0
+    push pointer 0
+    push argument 1
+    push argument 2
+    push local 0
+    push constant 0
+    push constant 1
+    call Connect4.line 6
+    push constant 3
+    gt
+    not
+    if-goto Connect4_23
+    push constant 1
+    neg
+    return
+    goto Connect4_22
+label Connect4_23
+label Connect4_22
+    push pointer 0
+    push argument 1
+    push argument 2
+    push local 0
+    push constant 1
+    push constant 0
+    call Connect4.line 6
+    push constant 3
+    gt
+    not
+    if-goto Connect4_25
+    push constant 1
+    neg
+    return
+    goto Connect4_24
+label Connect4_25
+label Connect4_24
+    push pointer 0
+    push argument 1
+    push argument 2
+    push local 0
+    push constant 1
+    push constant 1
+    call Connect4.line 6
+    push constant 3
+    gt
+    not
+    if-goto Connect4_27
+    push constant 1
+    neg
+    return
+    goto Connect4_26
+label Connect4_27
+label Connect4_26
+    push pointer 0
+    push argument 1
+    push argument 2
+    push local 0
+    push constant 1
+    push constant 1
+    neg
+    call Connect4.line 6
+    push constant 3
+    gt
+    not
+    if-goto Connect4_29
+    push constant 1
+    neg
+    return
+    goto Connect4_28
+label Connect4_29
+label Connect4_28
+    push constant 0
+    return
+function Connect4.line 3
+    push argument 0
+    pop pointer 0
+    push constant 1
+    pop local 0
+    push argument 1
+    push argument 4
+    add
+    pop local 1
+    push argument 2
+    push argument 5
+    add
+    pop local 2
+label Connect4_30
+    push local 1
+    push constant 1
+    neg
+    gt
+    push local 1
+    push constant 6
+    lt
+    and
+    push local 2
+    push constant 1
+    neg
+    gt
+    and
+    push local 2
+    push constant 7
+    lt
+    and
+    push local 1
+    push constant 7
+    call Math.multiply 2
+    push local 2
+    add
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    push argument 3
+    eq
+    and
+    not
+    if-goto Connect4_31
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    push local 1
+    push argument 4
+    add
+    pop local 1
+    push local 2
+    push argument 5
+    add
+    pop local 2
+    goto Connect4_30
+label Connect4_31
+    push argument 1
+    push argument 4
+    sub
+    pop local 1
+    push argument 2
+    push argument 5
+    sub
+    pop local 2
+label Connect4_32
+    push local 1
+    push constant 1
+    neg
+    gt
+    push local 1
+    push constant 6
+    lt
+    and
+    push local 2
+    push constant 1
+    neg
+    gt
+    and
+    push local 2
+    push constant 7
+    lt
+    and
+    push local 1
+    push constant 7
+    call Math.multiply 2
+    push local 2
+    add
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    push argument 3
+    eq
+    and
+    not
+    if-goto Connect4_33
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    push local 1
+    push argument 4
+    sub
+    pop local 1
+    push local 2
+    push argument 5
+    sub
+    pop local 2
+    goto Connect4_32
+label Connect4_33
+    push local 0
+    return
+function Connect4.drawGrid 3
+    push argument 0
+    pop pointer 0
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push constant 0
+    pop local 0
+label Connect4_34
+    push local 0
+    push constant 8
+    lt
+    not
+    if-goto Connect4_35
+    push constant 64
+    push local 0
+    push constant 32
+    call Math.multiply 2
+    add
+    pop local 1
+    push local 1
+    push constant 32
+    push local 1
+    push constant 224
+    call Screen.drawLine 4
+    pop temp 0
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Connect4_34
+label Connect4_35
+    push constant 0
+    pop local 0
+label Connect4_36
+    push local 0
+    push constant 7
+    lt
+    not
+    if-goto Connect4_37
+    push constant 32
+    push local 0
+    push constant 32
+    call Math.multiply 2
+    add
+    pop local 2
+    push constant 64
+    push local 2
+    push constant 288
+    push local 2
+    call Screen.drawLine 4
+    pop temp 0
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Connect4_36
+label Connect4_37
+    push constant 0
+    return
+function Connect4.drawX 4
+    push argument 0
+    pop pointer 0
+    push constant 64
+    push argument 2
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 6
+    add
+    pop local 0
+    push constant 32
+    push argument 1
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 6
+    add
+    pop local 1
+    push local 0
+    push constant 20
+    add
+    pop local 2
+    push local 1
+    push constant 20
+    add
+    pop local 3
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push local 0
+    push local 1
+    push local 2
+    push local 3
+    call Screen.drawLine 4
+    pop temp 0
+    push local 2
+    push local 1
+    push local 0
+    push local 3
+    call Screen.drawLine 4
+    pop temp 0
+    push constant 0
+    return
+function Connect4.drawO 4
+    push argument 0
+    pop pointer 0
+    push constant 64
+    push argument 2
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 6
+    add
+    pop local 0
+    push constant 32
+    push argument 1
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 6
+    add
+    pop local 1
+    push local 0
+    push constant 20
+    add
+    pop local 2
+    push local 1
+    push constant 20
+    add
+    pop local 3
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push local 0
+    push local 1
+    push local 2
+    push local 3
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    call Screen.setColor 1
+    pop temp 0
+    push local 0
+    push constant 3
+    add
+    push local 1
+    push constant 3
+    add
+    push local 2
+    push constant 3
+    sub
+    push local 3
+    push constant 3
+    sub
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    return
+function Connect4.drawCursor 1
+    push argument 0
+    pop pointer 0
+    push constant 64
+    push this 1
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 16
+    add
+    pop local 0
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push local 0
+    push constant 18
+    push local 0
+    push constant 28
+    call Screen.drawLine 4
+    pop temp 0
+    push local 0
+    push constant 4
+    sub
+    push constant 22
+    push local 0
+    push constant 28
+    call Screen.drawLine 4
+    pop temp 0
+    push local 0
+    push constant 4
+    add
+    push constant 22
+    push local 0
+    push constant 28
+    call Screen.drawLine 4
+    pop temp 0
+    push constant 0
+    return
+function Connect4.eraseCursor 1
+    push argument 0
+    pop pointer 0
+    push constant 64
+    push this 1
+    push constant 32
+    call Math.multiply 2
+    add
+    push constant 16
+    add
+    pop local 0
+    push constant 0
+    call Screen.setColor 1
+    pop temp 0
+    push local 0
+    push constant 5
+    sub
+    push constant 17
+    push local 0
+    push constant 5
+    add
+    push constant 29
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    return
+// Compiled Main.jack:
+function Main.main 1
+    call Connect4.new 0
+    pop local 0
+    push local 0
+    call Connect4.run 1
+    pop temp 0
+    push constant 0
+    return
