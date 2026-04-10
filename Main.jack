@@ -1,0 +1,8 @@
+class Main {
+    function void main() {
+        var Connect4 game;
+        let game = Connect4.new();
+        do game.run();
+        return;
+    }
+}
